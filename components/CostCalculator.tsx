@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type CnIndexItem = {
   cn: string;
@@ -44,6 +44,12 @@ type CalculatorRow = {
   benchmark: number;
   route: string;
 };
+
+type MailState =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; reportId: string; totalCost: number }
+  | { status: "error"; message: string };
 
 const phaseOutByYear: Record<number, number> = {
   2026: 97.5,
@@ -106,6 +112,8 @@ export function CostCalculator() {
   const [loadError, setLoadError] = useState("");
   const [year, setYear] = useState(2026);
   const [phaseOutInput, setPhaseOutInput] = useState(97.5);
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [mailState, setMailState] = useState<MailState>({ status: "idle" });
 
   useEffect(() => {
     fetch("/data/cbam-calculator-data.json")
@@ -180,6 +188,55 @@ export function CostCalculator() {
 
   function removeRow(id: number) {
     setRows((current) => (current.length === 1 ? current : current.filter((row) => row.id !== id)));
+  }
+
+  async function sendCostReport(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setMailState({ status: "loading" });
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      contactName: String(formData.get("contactName") ?? ""),
+      company: String(formData.get("company") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      year,
+      certificatePrice,
+      phaseOut,
+      rows: rows.map((row) => ({
+        country: row.country,
+        cn: row.cn,
+        category: row.category,
+        description: row.description,
+        mass: row.mass,
+        see: row.see,
+        benchmark: row.benchmark,
+        route: row.route
+      }))
+    };
+
+    try {
+      const response = await fetch("/api/cbam-cost-report", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error ?? "Das Kostenergebnis konnte nicht versendet werden.");
+      }
+
+      setMailState({ status: "success", reportId: result.reportId, totalCost: result.totalCost });
+      form.reset();
+    } catch (error) {
+      setMailState({
+        status: "error",
+        message: error instanceof Error ? error.message : "Das Kostenergebnis konnte nicht versendet werden."
+      });
+    }
   }
 
   return (
@@ -326,9 +383,18 @@ export function CostCalculator() {
       </div>
 
       <div className="border-t border-slate-200 p-5 sm:p-6">
-        <button type="button" className="focus-ring inline-flex rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/15 hover:bg-[#35685b]" onClick={addRow}>
-          Produkt hinzufügen
-        </button>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <button type="button" className="focus-ring inline-flex rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/15 hover:bg-[#35685b]" onClick={addRow}>
+            Produkt hinzufügen
+          </button>
+          <button
+            type="button"
+            className="focus-ring inline-flex rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-navy hover:border-navy/25"
+            onClick={() => setShowEmailForm((current) => !current)}
+          >
+            Ergebnisse per E-Mail erhalten
+          </button>
+        </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-4">
           <Metric label="Nettomasse" value={`${formatNumber(totals.mass)} t`} />
@@ -342,6 +408,50 @@ export function CostCalculator() {
           <span className="font-semibold">CBAM Benchmarks_20260206</span>. Die vereinfachte Kostenschätzung folgt dem im Markt üblichen Estimator-Ansatz:
           max(SEE 2026 - Benchmark, 0) x Nettomasse x Zertifikatskosten. Der Phase-Out wird separat ausgewiesen.
         </div>
+
+        {showEmailForm && (
+          <form className="mt-6 grid gap-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6" onSubmit={sendCostReport}>
+            <div>
+              <h3 className="text-xl font-semibold text-navy">Offizielles Ergebnisdokument per E-Mail</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Sie erhalten ein professionelles PDF mit Positionen, Annahmen, Summen und Hinweistext an die angegebene E-Mail-Adresse.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <label className="text-sm font-semibold text-navy">
+                Ansprechpartner
+                <input className="field mt-2" name="contactName" autoComplete="name" required />
+              </label>
+              <label className="text-sm font-semibold text-navy">
+                Unternehmen
+                <input className="field mt-2" name="company" autoComplete="organization" required />
+              </label>
+              <label className="text-sm font-semibold text-navy">
+                E-Mail
+                <input className="field mt-2" name="email" type="email" autoComplete="email" required />
+              </label>
+            </div>
+            <label className="flex gap-3 text-sm leading-6 text-slate-600">
+              <input className="focus-ring mt-1 h-4 w-4 rounded border-slate-300 text-navy" type="checkbox" required />
+              <span>Ich stimme zu, dass meine Angaben zur Erstellung und Zusendung des CBAM-Kostendokuments verarbeitet werden.</span>
+            </label>
+            {mailState.status === "error" && (
+              <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-700">{mailState.message}</div>
+            )}
+            {mailState.status === "success" && (
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-6 text-emerald-900">
+                Das Ergebnisdokument {mailState.reportId} wurde versendet. Gesamtschätzung: {formatEuro(mailState.totalCost)}.
+              </div>
+            )}
+            <button
+              type="submit"
+              disabled={mailState.status === "loading"}
+              className="focus-ring inline-flex w-full justify-center rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white hover:bg-[#132957] disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit"
+            >
+              {mailState.status === "loading" ? "Dokument wird versendet ..." : "Ergebnisse per E-Mail erhalten"}
+            </button>
+          </form>
+        )}
       </div>
 
       <style jsx>{`

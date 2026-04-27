@@ -216,6 +216,14 @@ export type Article = {
   sections: {
     title: string;
     paragraphs: string[];
+    image?: {
+      src: string;
+      alt: string;
+    };
+    links?: {
+      label: string;
+      href: string;
+    }[];
   }[];
   sources?: {
     label: string;
@@ -224,6 +232,225 @@ export type Article = {
 };
 
 export const articles: Article[] = [
+  {
+    slug: "cbam-lexikon-sop-importeure",
+    title: "CBAM-Lexikon und SOP für Importeure: Pflichten, Waren, Kosten und nächste Schritte",
+    description:
+      "Das große CBAM-Lexikon für Importeure: Für wen CBAM gilt, welche Waren betroffen sind, welche Regelungen relevant sind, wie Kosten entstehen und wie Unternehmen ihre Daten strukturiert vorbereiten.",
+    date: "2026-04-27",
+    readingTime: "22 Min.",
+    category: "CBAM-Lexikon",
+    intro:
+      "CBAM wirkt auf den ersten Blick wie ein reines Zollthema. In der Praxis ist es ein wiederkehrender Compliance-Prozess für Einkauf, Zoll, Finanzen, Nachhaltigkeit und Geschäftsführung. Dieses Lexikon bündelt die wichtigsten Fragen und dient als SOP für Unternehmen, die ihre CBAM-Betroffenheit prüfen, Daten sortieren, Lieferanten einbinden und mögliche Zertifikatskosten vorbereiten möchten.",
+    sections: [
+      {
+        title: "Kurzdefinition: Was ist CBAM?",
+        paragraphs: [
+          "CBAM steht für Carbon Border Adjustment Mechanism, also den CO2-Grenzausgleichsmechanismus der Europäischen Union. Betroffen sind bestimmte emissionsintensive Waren, die aus Drittstaaten in die EU eingeführt werden.",
+          "Der Mechanismus soll verhindern, dass CO2-intensive Produktion aus der EU in Länder mit geringerer CO2-Bepreisung verlagert wird. Für Importeure bedeutet CBAM vor allem: Waren prüfen, Emissionen ermitteln, Lieferantendaten einholen, Fristen beachten und ab der Regelphase Zertifikatspflichten vorbereiten.",
+          "CBAM ersetzt keine klassische Zollabwicklung. Es ergänzt sie um eine zusätzliche Klima- und Emissionslogik, die eng an Warencodes, Ursprungsländer, Nettomassen und eingebettete Emissionen gekoppelt ist."
+        ],
+        image: {
+          src: "/images/import_hamburg.jpg",
+          alt: "Containerschiff im Hafen als Einstieg in das CBAM-Lexikon für Importeure"
+        }
+      },
+      {
+        title: "Für wen gilt CBAM?",
+        paragraphs: [
+          "CBAM kann für Unternehmen relevant sein, die CBAM-Waren aus Nicht-EU-Ländern in die EU einführen. Entscheidend ist nicht die Branche des Unternehmens, sondern die konkrete Kombination aus Ware, KN- beziehungsweise CN-Code, Ursprung, Menge und Einfuhrvorgang.",
+          "Typische betroffene Rollen sind Importeure, indirekte Zollvertreter, Einkaufsabteilungen, Zollabteilungen, Finanzbereiche, Nachhaltigkeitsteams und Geschäftsführungen. Auch Unternehmen, die nur gelegentlich relevante Waren importieren, sollten prüfen, ob Schwellenwerte oder Sonderregeln greifen.",
+          "Besonders wichtig: CBAM betrifft nicht nur große Industrieunternehmen. Auch mittelständische Handels-, Produktions- und Projektunternehmen können betroffen sein, wenn sie relevante Vormaterialien, Bauteile oder Waren aus Drittstaaten beziehen."
+        ],
+        links: [
+          {
+            label: "CBAM-Betroffenheit prüfen lassen",
+            href: "/leistungen/cbam-betroffenheitsanalyse"
+          },
+          {
+            label: "Beratung anfragen",
+            href: "/beratung"
+          }
+        ]
+      },
+      {
+        title: "Welche Warengruppen sind grundsätzlich relevant?",
+        paragraphs: [
+          "Der CBAM-Anwendungsbereich umfasst derzeit insbesondere Eisen und Stahl, Aluminium, Zement, Düngemittel, Wasserstoff und Strom. Innerhalb dieser Gruppen kommt es auf konkrete KN-/CN-Codes an. Eine grobe Warenbeschreibung reicht für eine belastbare Prüfung nicht aus.",
+          "Für Unternehmen ist deshalb der erste operative Schritt eine Warencode-Liste aus den Importdaten. Diese Liste sollte mit Warenbeschreibung, Ursprungsländern, Lieferanten, Mengen, Zeiträumen und Zollbelegen verbunden werden.",
+          "Wenn Warencodes unklar, uneinheitlich oder historisch gewachsen sind, sollte das früh markiert werden. Die finale zollrechtliche Einreihung ist ein eigenes Thema und sollte bei Bedarf mit Zollberatung geklärt werden."
+        ],
+        image: {
+          src: "/images/import.jpg",
+          alt: "Containerterminal als Symbol für CBAM-relevante Warengruppen und Importdaten"
+        }
+      },
+      {
+        title: "Welche Regelungen und Phasen gibt es?",
+        paragraphs: [
+          "Der zentrale Rechtsrahmen ist die CBAM-Verordnung (EU) 2023/956. Daneben gibt es Durchführungsrechtsakte und praktische Vorgaben der EU-Kommission, etwa zu Berichten, Register, Zertifikatspreisen und Emissionsberechnung.",
+          "Die Übergangsphase diente vor allem der Meldung und Datensammlung. In der Regelphase stehen Zulassung, CBAM-Erklärungen, geprüfte Emissionsdaten und CBAM-Zertifikate stärker im Mittelpunkt.",
+          "Für Unternehmen ist wichtig, die regulatorischen Begriffe in operative Arbeit zu übersetzen: Welche Daten müssen aus welchem System kommen? Wer fragt Lieferanten an? Wer prüft Emissionswerte? Wer behält Fristen und Zuständigkeiten im Blick?"
+        ],
+        links: [
+          {
+            label: "Artikel zu CBAM-Zertifikaten und Terminen",
+            href: "/ratgeber/cbam-zertifikate-verkauf-termine-2027"
+          },
+          {
+            label: "Registrierung vorbereiten",
+            href: "/leistungen/cbam-registrierungsvorbereitung"
+          }
+        ]
+      },
+      {
+        title: "Was ist die 50-Tonnen-Schwelle?",
+        paragraphs: [
+          "Die 50-Tonnen-Schwelle ist für viele Importeure ein zentraler Prüfpunkt. Sie bezieht sich auf bestimmte CBAM-Waren pro Kalenderjahr und kann darüber entscheiden, ob Unternehmen weitere Anforderungen wie eine Zulassung als CBAM-Anmelder berücksichtigen müssen.",
+          "Die Schwelle sollte nicht pauschal geschätzt werden. Unternehmen brauchen eine nachvollziehbare Auswertung nach Kalenderjahr, Warencodes, Nettomasse, Ursprungsländern und betroffenen Gesellschaften.",
+          "Strom und Wasserstoff sind gesondert zu betrachten. Gerade bei Unternehmensgruppen, mehreren Importeuren oder indirekten Importstrukturen sollte die Auswertung sauber dokumentiert werden."
+        ]
+      },
+      {
+        title: "Was ist mit Produkten, die CBAM-Bestandteile nur teilweise enthalten?",
+        paragraphs: [
+          "Viele Praxisfragen entstehen bei Produkten, die nur teilweise Materialien aus den CBAM-Bereichen enthalten, etwa Komponenten mit Stahl- oder Aluminiumanteilen. Entscheidend ist nicht der umgangssprachliche Materialanteil allein, sondern ob die konkret eingeführte Ware mit ihrem KN-/CN-Code in den CBAM-Anwendungsbereich fällt.",
+          "Ein Produkt kann Stahl enthalten und dennoch nicht automatisch CBAM-pflichtig sein. Umgekehrt kann eine scheinbar einfache Ware aufgrund ihres Codes relevant sein. Deshalb gehört die Prüfung immer an die konkrete Einfuhrposition, nicht nur an Produktnamen oder technische Beschreibungen.",
+          "Für gemischte Waren empfiehlt sich eine Arbeitsliste mit Produktname, Warencode, Materialhinweisen, Lieferant, Ursprung, Nettomasse und offenem Klärungsstatus. Unklare Fälle sollten separat markiert und bei Bedarf fachlich geprüft werden."
+        ],
+        image: {
+          src: "/images/compliance.jpg",
+          alt: "Unterlagen und Datenanalyse als Kontext für gemischte Produkte mit möglichen CBAM-Anteilen"
+        }
+      },
+      {
+        title: "Welche Daten brauchen Importeure zuerst?",
+        paragraphs: [
+          "Am Anfang stehen Importdaten: Zollanmeldungen, Warennummern, Warenbeschreibungen, Ursprungsländer, Nettomassen, Lieferanten, Zeiträume, Rechnungsbezug und interne Artikelnummern. Ohne diese Grundlage bleibt CBAM zu abstrakt.",
+          "Danach folgt die CBAM-Markierung: Welche Positionen sind potenziell relevant? Welche Länder sind Drittstaaten? Welche Mengen laufen pro Jahr auf? Welche Lieferanten müssen Emissionsdaten liefern?",
+          "Eine gute SOP trennt dabei zwischen gesicherten Informationen, offenen Datenlücken und fachlich zu prüfenden Annahmen. Das macht die Abstimmung mit Geschäftsführung, Einkauf, Zoll und externen Beratern deutlich effizienter."
+        ],
+        links: [
+          {
+            label: "Readiness-Prozess aufbauen",
+            href: "/leistungen/cbam-readiness"
+          },
+          {
+            label: "Ratgeber: Betroffenheit prüfen",
+            href: "/ratgeber/cbam-betroffenheit-pruefen"
+          }
+        ]
+      },
+      {
+        title: "Wie teuer wird CBAM?",
+        paragraphs: [
+          "CBAM-Kosten hängen vor allem von eingebetteten Emissionen, anrechenbaren CO2-Preisen im Herkunftsland, Benchmarks, Zertifikatspreisen, Mengen und Datenqualität ab. Eine pauschale Euro-Antwort ist seriös kaum möglich.",
+          "Für eine erste Orientierung sollten Unternehmen Szenarien rechnen: Welche Mengen sind betroffen? Welche Standardwerte oder tatsächlichen Emissionswerte liegen vor? Welcher Zertifikatspreis wird angesetzt? Welche Daten fehlen noch?",
+          "Unser Kostenrechner hilft, Größenordnungen sichtbar zu machen. Er ersetzt keine rechtliche, steuerliche oder zollrechtliche Bewertung, eignet sich aber gut, um intern über Risiko, Budget und Datenbedarf zu sprechen."
+        ],
+        image: {
+          src: "/images/computer.jpg",
+          alt: "Laptop mit Datenauswertung als Symbol für CBAM-Kostenrechnung und Szenarien"
+        },
+        links: [
+          {
+            label: "CBAM-Kostenrechner öffnen",
+            href: "/cbam-kostenrechner"
+          },
+          {
+            label: "Artikel zum ersten Zertifikatspreis 2026",
+            href: "/ratgeber/erster-cbam-zertifikatspreis-q1-2026"
+          }
+        ]
+      },
+      {
+        title: "Was sind eingebettete Emissionen?",
+        paragraphs: [
+          "Eingebettete Emissionen sind die Emissionen, die mit der Herstellung der importierten CBAM-Waren verbunden sind. Sie werden häufig auch als graue Emissionen bezeichnet.",
+          "In der Praxis müssen Unternehmen unterscheiden, ob tatsächliche Emissionsdaten vom Hersteller vorliegen, ob Standardwerte genutzt werden oder ob Angaben noch fehlen. Jede Variante hat Auswirkungen auf Datenqualität, Nachweise und spätere Kostenabschätzung.",
+          "Lieferantenangaben sollten nicht nur gesammelt, sondern den richtigen Waren, Zeiträumen, Anlagen und Nachweisen zugeordnet werden. Genau hier entstehen in vielen Unternehmen die größten operativen Reibungsverluste."
+        ]
+      },
+      {
+        title: "Wie läuft Lieferantenkommunikation sinnvoll ab?",
+        paragraphs: [
+          "Lieferantenkommunikation sollte strukturiert, konkret und nachverfolgbar sein. Allgemeine Mails mit der Bitte um CBAM-Daten führen häufig zu unvollständigen oder nicht nutzbaren Antworten.",
+          "Eine gute Anfrage enthält betroffene Waren, relevante Zeiträume, benötigte Datenfelder, gewünschtes Format, Frist, Ansprechpartner und Hinweis auf Nachweise. Eingehende Antworten sollten mit Status, Rückfragen und Plausibilität in einer zentralen Übersicht erfasst werden.",
+          "Priorisieren Sie Lieferanten nach Volumen, CBAM-Relevanz und Datenlücke. So wird zuerst dort gearbeitet, wo der größte Einfluss auf Bericht, Kosten und Risiko liegt."
+        ],
+        links: [
+          {
+            label: "Lieferanten-Datenpaket ansehen",
+            href: "/leistungen/lieferanten-datenpaket"
+          },
+          {
+            label: "Ratgeber zu Lieferantendaten",
+            href: "/ratgeber/lieferantendaten-cbam-strukturieren"
+          }
+        ]
+      },
+      {
+        title: "SOP: Der praktische CBAM-Ablauf in 12 Schritten",
+        paragraphs: [
+          "1. Importdaten für den relevanten Zeitraum exportieren. 2. KN-/CN-Codes, Warenbeschreibungen, Ursprungsländer und Nettomassen normalisieren. 3. Potenziell CBAM-relevante Codes markieren. 4. Drittstaatenbezug prüfen. 5. Mengen und Schwellenwerte je Kalenderjahr auswerten. 6. Lieferanten und Hersteller identifizieren.",
+          "7. Datenlücken je Ware und Lieferant erfassen. 8. Lieferantenanfragen mit klaren Datenfeldern versenden. 9. Rückmeldungen dokumentieren und plausibilisieren. 10. Kosten- und Emissionsszenarien vorbereiten. 11. Zuständigkeiten, Fristen und Freigaben intern festlegen. 12. Ergebnisse regelmäßig aktualisieren und für Registrierung, Erklärung oder Beratung bereithalten.",
+          "Dieser Ablauf ist bewusst operativ formuliert. Er ersetzt keine rechtliche oder zollrechtliche Bewertung, sorgt aber dafür, dass Fachentscheidungen auf einer sauberen Datenbasis stattfinden."
+        ],
+        image: {
+          src: "/images/office.jpg",
+          alt: "Arbeitsplatz als Symbol für strukturierte CBAM-SOP und interne Zuständigkeiten"
+        }
+      },
+      {
+        title: "Welche internen Rollen sollten beteiligt sein?",
+        paragraphs: [
+          "Einkauf kennt Lieferanten und Vertragsbeziehungen. Zoll kennt Warencodes und Einfuhrprozesse. Finanzen braucht Kosten- und Rückstellungsinformationen. Nachhaltigkeit oder Compliance bewerten Emissionsdaten und Dokumentationsanforderungen. Die Geschäftsführung braucht eine verdichtete Risikosicht.",
+          "CBAM scheitert selten an einer einzelnen Information. Häufig scheitert es daran, dass Informationen in verschiedenen Abteilungen liegen und niemand die Gesamtstruktur verantwortet.",
+          "Deshalb sollte früh festgelegt werden, wer Daten liefert, wer prüft, wer Lieferanten nachhält, wer externe Berater einbindet und wer Entscheidungen freigibt."
+        ]
+      },
+      {
+        title: "Welche Fehler passieren häufig?",
+        paragraphs: [
+          "Häufige Fehler sind: nur nach Produktnamen statt nach Warencodes prüfen, Ursprungsländer nicht sauber auswerten, Nettomassen nicht konsolidieren, Lieferanten zu spät anfragen, Rückmeldungen in E-Mails liegen lassen und Kosten erst kurz vor Fristen betrachten.",
+          "Ein weiterer Fehler ist die Vermischung von Annahmen und gesicherten Daten. Für CBAM braucht es eine klare Trennung zwischen Fakten, offenen Punkten und zu prüfenden Fachfragen.",
+          "Auch eine reine Einmalliste reicht selten aus. CBAM ist ein laufender Prozess, weil neue Importe, Lieferanten, Codes, Mengen und regulatorische Details hinzukommen können."
+        ]
+      },
+      {
+        title: "Was sollte die Geschäftsführung wissen?",
+        paragraphs: [
+          "Die Geschäftsführung braucht keine Detailtabelle mit jeder einzelnen Zollposition. Sie braucht eine klare Übersicht über betroffene Warengruppen, Volumen, Lieferanten, Datenlücken, potenzielle Kosten, Fristen, Verantwortlichkeiten und nächste Entscheidungen.",
+          "Eine gute Management Summary beantwortet: Sind wir betroffen? Wie groß ist der Umfang? Welche Daten fehlen? Welche Risiken bestehen? Welche Ressourcen brauchen Einkauf, Zoll und Finanzen? Welche externen Prüfungen sind sinnvoll?",
+          "Damit wird CBAM nicht als Einzelaufgabe behandelt, sondern als steuerbarer Compliance- und Datenprozess."
+        ],
+        links: [
+          {
+            label: "Laufende CBAM-Begleitung",
+            href: "/leistungen/laufende-begleitung"
+          },
+          {
+            label: "Kontakt aufnehmen",
+            href: "/kontakt"
+          }
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: "EU-Kommission: Carbon Border Adjustment Mechanism",
+        href: "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en"
+      },
+      {
+        label: "EU-Kommission: CBAM Registry and Reporting",
+        href: "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-registry-and-reporting_en"
+      },
+      {
+        label: "EU-Kommission: Price of CBAM certificates",
+        href: "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/price-cbam-certificates_en"
+      }
+    ]
+  },
   {
     slug: "cbam-zertifikate-verkauf-termine-2027",
     title: "CBAM-Zertifikate: Verkauf, Abgabe und wichtige Termine ab 2027",

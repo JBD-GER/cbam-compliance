@@ -1,6 +1,10 @@
 import type { Article } from "@/lib/content";
 
 const articleImageMap: Record<string, { src: string; alt: string }> = {
+  "cbam-lexikon-sop-importeure": {
+    src: "/images/import_hamburg.jpg",
+    alt: "Containerschiff im Hafen als Kontext für das CBAM-Lexikon für Importeure"
+  },
   "cbam-zertifikate-verkauf-termine-2027": {
     src: "/images/import_hamburg.jpg",
     alt: "Containerschiff im Hafen als Kontext für CBAM-Zertifikate und Importprozesse"

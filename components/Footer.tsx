@@ -34,18 +34,34 @@ export function Footer() {
           <p className="mt-5 max-w-sm leading-7 text-slate-600">
             CBAM-Compliance.de unterstützt Importeure bei Datenanalyse, Lieferantenkommunikation und organisatorischer CBAM-Vorbereitung.
           </p>
-          <div className="mt-5 space-y-1 text-sm leading-6 text-slate-500">
-            <p>Flaaq Holding GmbH</p>
-            <p>Großer Kamp 5a, 31633 Leese</p>
-            <p>
-              <a href="tel:+4957618429666" className="hover:text-navy">
-                05761 8429666
-              </a>
-              {" · "}
-              <a href="mailto:info@cbam-compliance.de" className="hover:text-navy">
-                info@cbam-compliance.de
-              </a>
-            </p>
+          <div className="mt-6 rounded-3xl border border-slate-200 bg-white/80 p-5 text-sm leading-6 text-slate-600 shadow-sm">
+            <p className="font-semibold text-navy">Kontakt</p>
+            <dl className="mt-3 grid gap-2">
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Unternehmen</dt>
+                <dd className="mt-1 font-medium text-slate-700">Flaaq Holding GmbH</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Adresse</dt>
+                <dd className="mt-1">Großer Kamp 5a, 31633 Leese</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Telefon</dt>
+                <dd className="mt-1">
+                  <a href="tel:+4957618429666" className="font-medium text-navy hover:text-accent">
+                    05761 8429666
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">E-Mail</dt>
+                <dd className="mt-1">
+                  <a href="mailto:info@cbam-compliance.de" className="font-medium text-navy hover:text-accent">
+                    info@cbam-compliance.de
+                  </a>
+                </dd>
+              </div>
+            </dl>
           </div>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">

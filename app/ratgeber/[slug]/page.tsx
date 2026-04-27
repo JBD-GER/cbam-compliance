@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { LinkButton } from "@/components/Button";
 import { CTASection } from "@/components/CTASection";
 import { Section } from "@/components/Section";
 import { articles, formatArticleDate } from "@/lib/content";
@@ -110,6 +111,24 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>
+                {section.image && (
+                  <Image
+                    src={section.image.src}
+                    alt={section.image.alt}
+                    width={1920}
+                    height={1080}
+                    className="mt-7 aspect-[16/8] w-full rounded-[1.5rem] object-cover shadow-sm"
+                  />
+                )}
+                {section.links && section.links.length > 0 && (
+                  <div className="mt-6 flex flex-wrap gap-3 rounded-3xl border border-slate-200 bg-white/75 p-5">
+                    {section.links.map((link) => (
+                      <LinkButton key={link.href} href={link.href} variant="secondary">
+                        {link.label}
+                      </LinkButton>
+                    ))}
+                  </div>
+                )}
               </section>
             ))}
           </div>

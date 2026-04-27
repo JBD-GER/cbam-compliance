@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import { CbamAssessmentCalculator } from "@/components/CbamAssessmentCalculator";
 import { CTASection } from "@/components/CTASection";
 import { IndustrySection } from "@/components/IndustrySection";
 import { Section } from "@/components/Section";
@@ -111,6 +112,14 @@ export default function AffectedAnalysisPage() {
       </Section>
 
       <IndustrySection />
+
+      <Section
+        eyebrow="Online-Prüfung"
+        title="CBAM-Betroffenheit direkt einschätzen"
+        text="Nutzen Sie den Schnellcheck, wenn Sie eine erste strukturierte Einschätzung benötigen. Der Bericht wird automatisch als PDF erzeugt und an die angegebene E-Mail-Adresse gesendet."
+      >
+        <CbamAssessmentCalculator />
+      </Section>
 
       <Section
         title="So entsteht aus Importdaten eine belastbare Entscheidungsgrundlage"

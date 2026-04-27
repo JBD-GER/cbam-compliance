@@ -8,11 +8,45 @@ const inputClass =
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSent(true);
-    event.currentTarget.reset();
+    setSending(true);
+    setError("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: String(formData.get("name") ?? ""),
+          company: String(formData.get("company") ?? ""),
+          email: String(formData.get("email") ?? ""),
+          phone: String(formData.get("phone") ?? ""),
+          service: String(formData.get("service") ?? ""),
+          message: String(formData.get("message") ?? "")
+        })
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error ?? "Ihre Anfrage konnte nicht gesendet werden.");
+      }
+
+      setSent(true);
+      form.reset();
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : "Ihre Anfrage konnte nicht gesendet werden.");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (sent) {
@@ -70,8 +104,9 @@ export function ContactForm() {
         <input className="focus-ring mt-1 h-4 w-4 rounded border-slate-300 text-navy" type="checkbox" required />
         <span>Ich akzeptiere die Datenschutzhinweise und stimme der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage zu.</span>
       </label>
-      <Button type="submit" className="w-full sm:w-fit">
-        Anfrage senden
+      {error && <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-700">{error}</div>}
+      <Button type="submit" className="w-full sm:w-fit" disabled={sending}>
+        {sending ? "Anfrage wird gesendet ..." : "Anfrage senden"}
       </Button>
     </form>
   );
