@@ -15,9 +15,14 @@ export function GoogleAdsConversion({ sendTo }: GoogleAdsConversionProps) {
   useEffect(() => {
     const win = window as WindowWithGtag;
     win.dataLayer = win.dataLayer ?? [];
+    win.gtag =
+      win.gtag ??
+      function gtagFallback(...args: unknown[]) {
+        win.dataLayer?.push(args);
+      };
 
     if (sendTo) {
-      win.gtag?.("event", "conversion", { send_to: sendTo });
+      win.gtag("event", "conversion", { send_to: sendTo });
       return;
     }
 
