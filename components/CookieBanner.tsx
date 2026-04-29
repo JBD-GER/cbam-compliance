@@ -69,6 +69,19 @@ export function CookieBanner() {
     }
   }, [consentStored]);
 
+  useEffect(() => {
+    if (consentStored || dismissed) {
+      return;
+    }
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [consentStored, dismissed]);
+
   function save(choice: ConsentChoice) {
     persistConsent(choice);
     setAnalytics(choice.analytics);
@@ -81,10 +94,17 @@ export function CookieBanner() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-4 py-4 shadow-[0_-16px_40px_rgba(15,23,42,0.14)] backdrop-blur">
-      <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-[1.3fr_0.95fr] lg:items-end">
+    <div
+      aria-labelledby="cookie-banner-title"
+      aria-modal="true"
+      className="fixed inset-0 z-[100] grid place-items-center bg-navy/55 px-4 py-6 backdrop-blur-sm"
+      role="dialog"
+    >
+      <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-slate-200 bg-white p-5 shadow-2xl shadow-navy/25 sm:p-7">
         <div>
-          <p className="text-base font-semibold text-navy">Cookie-Einstellungen</p>
+          <p id="cookie-banner-title" className="text-xl font-semibold text-navy">
+            Cookie-Einstellungen
+          </p>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
             Wir nutzen notwendige Cookies für den Betrieb der Website. Statistik- und Marketing-Cookies, inklusive Google Ads
             Conversion-Messung, verwenden wir nur mit Ihrer Einwilligung. Details finden Sie in der{" "}
@@ -95,8 +115,8 @@ export function CookieBanner() {
           </p>
         </div>
 
-        <div className="grid gap-3">
-          <div className="grid gap-2 sm:grid-cols-2">
+        <div className="mt-5 grid gap-4">
+          <div className="grid gap-3 sm:grid-cols-2">
             <label className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
               <input checked disabled className="mt-1 h-4 w-4 rounded border-slate-300 text-navy" type="checkbox" />
               <span>
@@ -132,21 +152,21 @@ export function CookieBanner() {
 
           <div className="grid gap-2 sm:grid-cols-3">
             <button
-              className="focus-ring rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-navy hover:border-navy/25"
+              className="focus-ring rounded-full border border-accent bg-white px-4 py-3 text-sm font-semibold text-accent hover:bg-[#eef6f3]"
               onClick={() => save({ analytics: false, marketing: false })}
               type="button"
             >
               Ablehnen
             </button>
             <button
-              className="focus-ring rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-navy hover:border-navy/25"
+              className="focus-ring rounded-full bg-accent px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/15 hover:bg-[#35685b]"
               onClick={() => save({ analytics, marketing })}
               type="button"
             >
               Auswahl speichern
             </button>
             <button
-              className="focus-ring rounded-full bg-navy px-4 py-3 text-sm font-semibold text-white hover:bg-[#132957]"
+              className="focus-ring rounded-full bg-accent px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/15 hover:bg-[#35685b]"
               onClick={() => save({ analytics: true, marketing: true })}
               type="button"
             >
