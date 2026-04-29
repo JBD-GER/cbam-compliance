@@ -8,7 +8,7 @@ const muted = "#64748b";
 const accent = "#41796a";
 const border = "#dbe3ea";
 const pale = "#f6f8fb";
-const pageBottom = 760;
+const pageBottom = 735;
 const contentWidth = 488;
 
 function formatDate(value: string) {
@@ -100,7 +100,7 @@ function addDocumentFooters(doc: PDFKit.PDFDocument) {
   for (let index = range.start; index < range.start + range.count; index += 1) {
     doc.switchToPage(index);
     const pageNumber = index - range.start + 1;
-    const footerY = doc.page.height - 48;
+    const footerY = doc.page.height - 66;
 
     doc
       .moveTo(54, footerY - 10)
@@ -114,6 +114,7 @@ function addDocumentFooters(doc: PDFKit.PDFDocument) {
       .fontSize(7.8)
       .text("Flaaq Holding GmbH | Großer Kamp 5a, 31633 Leese | 05761 8429666 | info@cbam-compliance.de", 54, footerY, {
         width: 395,
+        height: 12,
         lineBreak: false
       });
     doc
@@ -123,6 +124,7 @@ function addDocumentFooters(doc: PDFKit.PDFDocument) {
       .text(`Seite ${pageNumber} von ${range.count}`, doc.page.width - 154, footerY, {
         width: 100,
         align: "right",
+        height: 12,
         lineBreak: false
       });
   }

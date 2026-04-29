@@ -9,7 +9,7 @@ const muted = "#64748b";
 const accent = "#41796a";
 const border = "#dbe3ea";
 const pale = "#f6f8fb";
-const pageBottom = 760;
+const pageBottom = 735;
 const contentWidth = 488;
 
 function formatDate(value: string) {
@@ -71,16 +71,36 @@ function scoreExplanation(score: number) {
   return "0-29 Punkte: aktuell geringe CBAM-Relevanz nach den Angaben. Neue Waren, Ursprungsländer, Mengen oder Codes sollten dennoch regelmäßig erneut geprüft werden.";
 }
 
-function addKeyValueRows(doc: PDFKit.PDFDocument, rows: string[][]) {
+function choiceLabel(value: string) {
+  const labels: Record<string, string> = {
+    yes: "Ja",
+    no: "Nein",
+    unknown: "Unklar",
+    partial: "Teilweise",
+    applied: "Beantragt"
+  };
+
+  return labels[value] ?? value;
+}
+
+function displayValue(value: string | undefined) {
+  const cleanValue = value?.trim();
+  return cleanValue ? cleanValue : "Keine Angabe";
+}
+
+function addKeyValueRows(doc: PDFKit.PDFDocument, rows: Array<[string, string]>) {
   rows.forEach(([label, value]) => {
-    doc.font("Helvetica").fontSize(10.5);
-    const valueHeight = doc.heightOfString(value, { width: 330, lineGap: 3 });
-    ensureSpace(doc, Math.max(32, valueHeight + 12));
+    const cleanValue = displayValue(value);
+    doc.font("Helvetica").fontSize(10.2);
+    const valueHeight = doc.heightOfString(cleanValue, { width: 300, lineGap: 3 });
+    const rowHeight = Math.max(38, valueHeight + 18);
+    ensureSpace(doc, rowHeight + 8);
     const y = doc.y;
-    doc.roundedRect(54, y - 6, contentWidth, Math.max(26, valueHeight + 12), 8).fill("#ffffff").strokeColor("#edf2f7").stroke();
-    doc.fillColor(muted).font("Helvetica-Bold").fontSize(9.2).text(label, 70, y, { width: 130 });
-    doc.fillColor(ink).font("Helvetica").fontSize(10.2).text(value, 214, y, { width: 306, lineGap: 3 });
-    doc.y = y + Math.max(24, valueHeight + 10);
+
+    doc.roundedRect(54, y, contentWidth, rowHeight, 10).fill("#ffffff").strokeColor("#edf2f7").stroke();
+    doc.fillColor(muted).font("Helvetica-Bold").fontSize(8.6).text(label.toUpperCase(), 72, y + 12, { width: 130 });
+    doc.fillColor(ink).font("Helvetica").fontSize(10.2).text(cleanValue, 214, y + 10, { width: 300, lineGap: 3 });
+    doc.y = y + rowHeight + 8;
   });
 }
 
@@ -103,7 +123,7 @@ function addDocumentFooters(doc: PDFKit.PDFDocument) {
   for (let index = range.start; index < range.start + range.count; index += 1) {
     doc.switchToPage(index);
     const pageNumber = index - range.start + 1;
-    const footerY = doc.page.height - 48;
+    const footerY = doc.page.height - 66;
 
     doc
       .moveTo(54, footerY - 10)
@@ -117,6 +137,7 @@ function addDocumentFooters(doc: PDFKit.PDFDocument) {
       .fontSize(7.8)
       .text("Flaaq Holding GmbH | Großer Kamp 5a, 31633 Leese | 05761 8429666 | info@cbam-compliance.de", 54, footerY, {
         width: 395,
+        height: 12,
         lineBreak: false
       });
     doc
@@ -126,6 +147,7 @@ function addDocumentFooters(doc: PDFKit.PDFDocument) {
       .text(`Seite ${pageNumber} von ${range.count}`, doc.page.width - 154, footerY, {
         width: 100,
         align: "right",
+        height: 12,
         lineBreak: false
       });
   }
@@ -201,17 +223,20 @@ export async function createCbamReportPdf(input: AssessmentInput, result: Assess
   const sectorText = input.sectors.map((sector) => sectorLabels[sector]).join(", ") || "Keine Angabe";
   const rows = [
     ["Unternehmen", input.company],
+    ["Ansprechpartner", input.contactName],
     ["E-Mail", input.email],
-    ["Drittstaatenimporte", input.importsFromThirdCountries],
+    ["Telefon", input.phone || "Keine Angabe"],
+    ["Drittstaatenimporte", choiceLabel(input.importsFromThirdCountries)],
     ["Warengruppen", sectorText],
     ["Jahresmenge", typeof input.annualMassTonnes === "number" ? `${input.annualMassTonnes} t` : "Keine Angabe"],
     ["KN-/CN-Codes", input.cnCodes || "Keine Angabe"],
     ["Ursprungsländer", input.originCountries || "Keine Angabe"],
-    ["Lieferantendaten", input.hasSupplierData],
-    ["Emissionsdaten", input.hasEmissionData],
-    ["Interner CBAM-Prozess", input.hasCbamProcess],
-    ["Zugelassener CBAM-Anmelder", input.hasAuthorizedDeclarant]
-  ];
+    ["Lieferantendaten", choiceLabel(input.hasSupplierData)],
+    ["Emissionsdaten", choiceLabel(input.hasEmissionData)],
+    ["Interner CBAM-Prozess", choiceLabel(input.hasCbamProcess)],
+    ["Zugelassener CBAM-Anmelder", choiceLabel(input.hasAuthorizedDeclarant)],
+    ["Teil-/Mischprodukte", choiceLabel(input.mixedProducts)]
+  ] satisfies Array<[string, string]>;
 
   addKeyValueRows(doc, rows);
 
