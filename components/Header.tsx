@@ -12,10 +12,10 @@ const nav = [
 ];
 
 const packages = [
-  { href: "/leistungen", label: "Alle CBAM-Pakete" },
+  { href: "/leistungen", label: "Alle CBAM-Dienstleistungen" },
   { href: "/leistungen/cbam-betroffenheitsanalyse", label: "CBAM-Betroffenheitsanalyse" },
-  { href: "/leistungen/cbam-readiness", label: "CBAM-Readiness-Paket" },
-  { href: "/leistungen/lieferanten-datenpaket", label: "Lieferanten-Datenpaket" },
+  { href: "/leistungen/cbam-readiness", label: "CBAM-Readiness-Dienstleistung" },
+  { href: "/leistungen/lieferanten-datenpaket", label: "Lieferanten-Datendienstleistung" },
   { href: "/leistungen/cbam-registrierungsvorbereitung", label: "CBAM-Registrierungsvorbereitung" },
   { href: "/leistungen/laufende-begleitung", label: "Laufende CBAM-Begleitung" }
 ];
@@ -34,7 +34,7 @@ export function Header() {
               type="button"
               aria-haspopup="true"
             >
-              CBAM-Pakete
+              CBAM-Dienstleistung
             </button>
             <div className="invisible absolute left-0 top-full z-50 w-80 pt-4 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
               <div className="rounded-3xl border border-slate-200 bg-white p-3 shadow-xl">
@@ -77,7 +77,7 @@ export function Header() {
         <div className="border-t border-slate-100 bg-white/95 px-5 py-5 shadow-xl md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-4" aria-label="Mobile Navigation">
             <div className="rounded-2xl bg-slate-50 p-3">
-              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-accent">CBAM-Pakete</p>
+              <p className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-accent">CBAM-Dienstleistungen</p>
               {packages.map((item) => (
                 <Link key={`${item.href}-${item.label}`} href={item.href} className="block rounded-xl px-3 py-3 font-medium text-slate-800 hover:bg-white" onClick={() => setOpen(false)}>
                   {item.label}

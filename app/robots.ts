@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/"
     },
     sitemap: `${siteUrl}/sitemap.xml`,
-    host: "cbam-compliance.de"
+    host: "www.cbam-compliance.de"
   };
 }

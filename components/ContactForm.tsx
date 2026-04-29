@@ -1,13 +1,14 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
 
 const inputClass =
   "focus-ring mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink shadow-sm outline-none transition placeholder:text-slate-400 hover:border-slate-300";
 
 export function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const router = useRouter();
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
@@ -40,24 +41,13 @@ export function ContactForm() {
         throw new Error(result.error ?? "Ihre Anfrage konnte nicht gesendet werden.");
       }
 
-      setSent(true);
       form.reset();
+      router.push("/danke?typ=kontakt");
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Ihre Anfrage konnte nicht gesendet werden.");
     } finally {
       setSending(false);
     }
-  }
-
-  if (sent) {
-    return (
-      <div className="glass p-8">
-        <p className="text-xl font-semibold text-navy">Vielen Dank.</p>
-        <p className="mt-3 leading-7 text-slate-600">
-          Ihre Anfrage wurde übermittelt. Wir melden uns zeitnah bei Ihnen.
-        </p>
-      </div>
-    );
   }
 
   return (
@@ -89,8 +79,8 @@ export function ContactForm() {
             Bitte auswählen
           </option>
           <option>CBAM-Betroffenheitsanalyse</option>
-          <option>CBAM-Readiness-Paket</option>
-          <option>Lieferanten-Datenpaket</option>
+          <option>CBAM-Readiness-Dienstleistung</option>
+          <option>Lieferanten-Datendienstleistung</option>
           <option>Registrierungsvorbereitung</option>
           <option>Laufende CBAM-Begleitung</option>
           <option>Ich bin mir nicht sicher</option>

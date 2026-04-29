@@ -5,9 +5,9 @@ import { Section } from "@/components/Section";
 import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createSeoMetadata({
-  title: "CBAM-Readiness-Paket",
+  title: "CBAM-Readiness-Dienstleistung",
   description:
-    "CBAM-Readiness-Paket für Importeure: Datenraum, Risikomatrix, Lieferantenkommunikation, Registrierungsvorbereitung und Management Summary für die CBAM-Regelphase.",
+    "CBAM-Readiness-Dienstleistung für Importeure: Datenraum, Risikomatrix, Lieferantenkommunikation, Registrierungsvorbereitung und Management Summary für die CBAM-Regelphase.",
   path: "/leistungen/cbam-readiness",
   image: "/images/compliance.jpg"
 });
@@ -57,7 +57,7 @@ export default function ReadinessPage() {
     <>
       <Section
         eyebrow="Leistung"
-        title="CBAM-Readiness-Paket"
+        title="CBAM-Readiness-Dienstleistung"
         text="Wir bereiten Ihr Unternehmen strukturiert auf die CBAM-Regelphase vor."
       >
         <div className="mb-10 grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
@@ -73,7 +73,7 @@ export default function ReadinessPage() {
               Readiness bedeutet, CBAM nicht nur fachlich zu verstehen, sondern intern arbeitsfähig zu werden. Entscheidend ist, dass Daten, Rollen, Lieferantenkommunikation und Entscheidungswege zusammenpassen.
             </p>
             <p>
-              Das Paket ist für Unternehmen gedacht, die CBAM nicht als einmalige Analyse behandeln möchten, sondern eine belastbare Grundlage für die Regelphase schaffen wollen.
+              Diese Dienstleistung ist für Unternehmen gedacht, die CBAM nicht als einmalige Analyse behandeln möchten, sondern eine belastbare Grundlage für die Regelphase schaffen wollen.
             </p>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function ReadinessPage() {
         </div>
       </Section>
 
-      <Section title="Module des Readiness-Pakets">
+      <Section title="Module der Readiness-Dienstleistung">
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {modules.map(([title, text]) => (
             <div key={title} className="glass p-6">
@@ -110,7 +110,7 @@ export default function ReadinessPage() {
       </Section>
 
       <Section
-        title="Was nach dem Readiness-Paket klarer sein sollte"
+        title="Was nach der Readiness-Dienstleistung klarer sein sollte"
         text="Das Ziel ist eine realistische, intern nutzbare Arbeitsgrundlage. Sie wissen, welche Daten tragfähig sind, wo noch Verifizierungen fehlen und welche Verantwortlichkeiten im Unternehmen greifen müssen."
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -125,7 +125,7 @@ export default function ReadinessPage() {
       <CTASection
         title="CBAM-Readiness strukturiert aufbauen"
         text="Wir prüfen Ihre Ausgangslage und schlagen einen klaren Projektumfang vor."
-        button="Readiness-Paket anfragen"
+        button="Readiness anfragen"
       />
     </>
   );

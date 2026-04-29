@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+import { CookieBanner } from "@/components/CookieBanner";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { defaultDescription, defaultOgImage, organizationJsonLd, siteName, siteUrl, websiteJsonLd } from "@/lib/seo";
@@ -9,6 +11,8 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap"
 });
+
+const googleTagId = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -66,6 +70,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="de">
       <body className={`${inter.className} min-h-screen antialiased`}>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                wait_for_update: 500
+              });
+              gtag('set', 'ads_data_redaction', true);
+            `
+          }}
+        />
+        {googleTagId ? (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`} strategy="afterInteractive" />
+            <Script id="google-tag-config" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${googleTagId}');
+              `}
+            </Script>
+          </>
+        ) : null}
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
@@ -76,6 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

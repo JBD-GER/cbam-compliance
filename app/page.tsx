@@ -47,10 +47,10 @@ const dataAreas = [
   ["Management-Übersicht", "Geschäftsführung und Fachabteilungen erhalten eine klare Sicht auf Umfang, offene Punkte, Prioritäten und nächste organisatorische Schritte."]
 ];
 
-const packageFit = [
+const serviceFit = [
   ["Sie wissen noch nicht, ob CBAM relevant ist.", "CBAM-Betroffenheitsanalyse", "Sinnvoll, wenn zunächst Waren, Codes, Ursprungsländer und Mengen eingeordnet werden müssen."],
-  ["Sie möchten CBAM operativ vorbereiten.", "CBAM-Readiness-Paket", "Passend, wenn Einkauf, Zoll, Finanzen und Geschäftsführung eine gemeinsame Arbeitsgrundlage benötigen."],
-  ["Lieferanten- und Emissionsdaten fehlen.", "Lieferanten-Datenpaket", "Geeignet, wenn Rückmeldungen eingeholt, sortiert und verwertbar aufbereitet werden sollen."],
+  ["Sie möchten CBAM operativ vorbereiten.", "CBAM-Readiness-Dienstleistung", "Passend, wenn Einkauf, Zoll, Finanzen und Geschäftsführung eine gemeinsame Arbeitsgrundlage benötigen."],
+  ["Lieferanten- und Emissionsdaten fehlen.", "Lieferanten-Datendienstleistung", "Geeignet, wenn Rückmeldungen eingeholt, sortiert und verwertbar aufbereitet werden sollen."],
   ["CBAM soll dauerhaft im Importprozess bleiben.", "Laufende CBAM-Begleitung", "Für Unternehmen mit regelmäßigen Importen, neuen Warencodes oder wechselnden Lieferanten."]
 ];
 
@@ -97,7 +97,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <LinkButton href="/beratung">CBAM-Betroffenheit prüfen lassen</LinkButton>
               <LinkButton href="/leistungen" variant="secondary">
-                CBAM-Pakete ansehen
+                CBAM-Dienstleistungen ansehen
               </LinkButton>
             </div>
             <div className="mt-8 grid gap-3 text-sm font-medium text-slate-700 sm:grid-cols-2">
@@ -221,7 +221,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section eyebrow="CBAM-Pakete" title="Pakete für unterschiedliche Ausgangslagen" centered>
+      <Section eyebrow="CBAM-Dienstleistungen" title="Dienstleistungen für unterschiedliche Ausgangslagen" centered>
         <div className="grid gap-6 lg:grid-cols-3">
           {mainServices.map((service) => (
             <ServiceCard key={service.title} {...service} />
@@ -235,7 +235,7 @@ export default function HomePage() {
         text="Der passende Umfang hängt davon ab, ob Sie zunächst Betroffenheit klären, Lieferantendaten strukturieren, einen internen Prozess aufbauen oder CBAM dauerhaft in Ihren Importablauf integrieren möchten."
       >
         <div className="grid gap-4 md:grid-cols-2">
-          {packageFit.map(([situation, recommendation, text]) => (
+          {serviceFit.map(([situation, recommendation, text]) => (
             <div key={situation} className="rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm">
               <p className="text-sm font-semibold uppercase tracking-[0.14em] text-accent">Ausgangslage</p>
               <h3 className="mt-3 text-xl font-semibold text-navy">{situation}</h3>

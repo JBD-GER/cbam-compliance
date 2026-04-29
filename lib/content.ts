@@ -23,7 +23,7 @@ export const mainServices: Service[] = [
     cta: "Analyse anfragen"
   },
   {
-    title: "CBAM-Readiness-Paket",
+    title: "CBAM-Readiness-Dienstleistung",
     href: "/leistungen/cbam-readiness",
     description: "Für Unternehmen, die CBAM strukturiert in Einkauf, Zoll, Buchhaltung und Geschäftsführung vorbereiten möchten.",
     features: [
@@ -34,7 +34,7 @@ export const mainServices: Service[] = [
       "Vorbereitung der Registrierung",
       "Management Summary für die Geschäftsführung"
     ],
-    cta: "Readiness-Paket anfragen",
+    cta: "Readiness anfragen",
     badge: "Hauptangebot"
   },
   {
@@ -60,12 +60,12 @@ export const allServices = [
     description: "Wir prüfen, ob Ihre Importdaten, Waren, Ursprungsländer und Mengen in den CBAM-Anwendungsbereich fallen."
   },
   {
-    title: "CBAM-Readiness-Paket",
+    title: "CBAM-Readiness-Dienstleistung",
     href: "/leistungen/cbam-readiness",
     description: "Wir bauen eine strukturierte CBAM-Daten- und Prozessgrundlage für Ihr Unternehmen auf."
   },
   {
-    title: "Lieferanten-Datenpaket",
+    title: "Lieferanten-Datendienstleistung",
     href: "/leistungen/lieferanten-datenpaket",
     description: "Wir strukturieren die Kommunikation mit relevanten Lieferanten und bereiten Emissionsdaten verwertbar auf."
   },
@@ -380,7 +380,7 @@ export const articles: Article[] = [
         ],
         links: [
           {
-            label: "Lieferanten-Datenpaket ansehen",
+            label: "Lieferanten-Datendienstleistung ansehen",
             href: "/leistungen/lieferanten-datenpaket"
           },
           {

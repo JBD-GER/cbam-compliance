@@ -5,9 +5,9 @@ import { Section } from "@/components/Section";
 import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createSeoMetadata({
-  title: "Lieferanten-Datenpaket für CBAM",
+  title: "Lieferanten-Datendienstleistung für CBAM",
   description:
-    "Lieferanten-Datenpaket für CBAM: Wir strukturieren Lieferantenkommunikation, Datenanforderungen, Rückmeldungen, Emissionsinformationen und offene Verifizierungspunkte.",
+    "Lieferanten-Datendienstleistung für CBAM: Wir strukturieren Lieferantenkommunikation, Datenanforderungen, Rückmeldungen, Emissionsinformationen und offene Verifizierungspunkte.",
   path: "/leistungen/lieferanten-datenpaket",
   image: "/images/beratung.jpg"
 });
@@ -57,7 +57,7 @@ export default function SupplierDataPackagePage() {
     <>
       <Section
         eyebrow="Leistung"
-        title="Lieferanten-Datenpaket"
+        title="Lieferanten-Datendienstleistung"
         text="Wir strukturieren die Kommunikation mit relevanten Lieferanten und bereiten Emissionsdaten, Rückmeldungen und offene Punkte verwertbar auf."
       >
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
@@ -66,7 +66,7 @@ export default function SupplierDataPackagePage() {
               CBAM-Vorbereitung scheitert in der Praxis selten an nur einer Zahl. Häufig fehlt eine belastbare Übersicht darüber, welcher Lieferant welche Informationen liefern muss, welche Daten bereits vorliegen und welche Angaben noch verifiziert oder fachlich eingeordnet werden müssen.
             </p>
             <p>
-              Das Lieferanten-Datenpaket schafft genau diese Übersicht. Es ist besonders sinnvoll, wenn mehrere Lieferanten, Händler oder Warengruppen betroffen sind und die Kommunikation nicht mehr über einzelne E-Mails steuerbar ist.
+              Diese Lieferanten-Datendienstleistung schafft genau diese Übersicht. Sie ist besonders sinnvoll, wenn mehrere Lieferanten, Händler oder Warengruppen betroffen sind und die Kommunikation nicht mehr über einzelne E-Mails steuerbar ist.
             </p>
           </div>
           <Image
@@ -111,7 +111,7 @@ export default function SupplierDataPackagePage() {
         </div>
       </Section>
 
-      <Section title="Ergebnisse des Lieferanten-Datenpakets">
+      <Section title="Ergebnisse der Lieferanten-Datendienstleistung">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((item) => (
             <div key={item} className="rounded-3xl border border-slate-200 bg-white/80 p-5 font-medium leading-7 text-slate-700 shadow-sm">
@@ -124,7 +124,7 @@ export default function SupplierDataPackagePage() {
       <CTASection
         title="Lieferantendaten strukturiert nachhalten"
         text="Wir klären, welche Lieferanten relevant sind, welche Informationen fehlen und wie eine verwertbare CBAM-Datenstruktur aufgebaut werden kann."
-        button="Lieferanten-Datenpaket anfragen"
+        button="Lieferantendaten anfragen"
       />
     </>
   );

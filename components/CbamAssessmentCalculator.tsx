@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
 import type { CbamSector } from "@/lib/cbamAssessment";
 
@@ -25,6 +26,7 @@ type SubmitState =
   | { status: "error"; message: string };
 
 export function CbamAssessmentCalculator() {
+  const router = useRouter();
   const [selectedSectors, setSelectedSectors] = useState<CbamSector[]>(["unknown"]);
   const [state, setState] = useState<SubmitState>({ status: "idle" });
 
@@ -94,6 +96,7 @@ export function CbamAssessmentCalculator() {
       });
       form.reset();
       setSelectedSectors(["unknown"]);
+      router.push("/danke?typ=betroffenheitsanalyse");
     } catch (error) {
       setState({
         status: "error",

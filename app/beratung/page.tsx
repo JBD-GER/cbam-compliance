@@ -7,7 +7,7 @@ import { createSeoMetadata } from "@/lib/seo";
 export const metadata: Metadata = createSeoMetadata({
   title: "CBAM-Beratung anfragen",
   description:
-    "Kontakt aufnehmen für CBAM-Betroffenheitsanalyse, CBAM-Readiness-Paket, Lieferanten-Datenpaket, Registrierungsvorbereitung oder laufende CBAM-Begleitung.",
+    "Kontakt aufnehmen für CBAM-Betroffenheitsanalyse, CBAM-Readiness, Lieferantendaten, Registrierungsvorbereitung oder laufende CBAM-Begleitung.",
   path: "/beratung",
   image: "/images/team.png"
 });

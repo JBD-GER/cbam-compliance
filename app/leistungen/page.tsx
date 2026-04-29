@@ -7,9 +7,9 @@ import { allServices } from "@/lib/content";
 import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createSeoMetadata({
-  title: "CBAM-Pakete für Importeure",
+  title: "CBAM-Dienstleistungen für Importeure",
   description:
-    "CBAM-Pakete für Importeure: Betroffenheitsanalyse, Readiness-Paket, Lieferanten-Datenpaket, Registrierungsvorbereitung und laufende CBAM-Begleitung.",
+    "CBAM-Dienstleistungen für Importeure: Betroffenheitsanalyse, Readiness, Lieferantendaten, Registrierungsvorbereitung und laufende CBAM-Begleitung.",
   path: "/leistungen",
   image: "/images/office.jpg"
 });
@@ -25,16 +25,16 @@ const decisionHelp = [
   {
     situation: "Sie haben erste Hinweise auf CBAM, aber keine klare Übersicht.",
     recommendation: "Starten Sie mit der CBAM-Betroffenheitsanalyse.",
-    text: "Dieses Paket schafft eine erste belastbare Sicht auf Waren, Ursprungsländer, Mengen, Lieferanten und Datenlücken."
+    text: "Diese Dienstleistung schafft eine erste belastbare Sicht auf Waren, Ursprungsländer, Mengen, Lieferanten und Datenlücken."
   },
   {
     situation: "CBAM soll intern in Rollen, Prozesse und Datenräume überführt werden.",
-    recommendation: "Das CBAM-Readiness-Paket ist der passende Aufbau.",
+    recommendation: "Die CBAM-Readiness-Dienstleistung ist der passende Aufbau.",
     text: "Hier geht es um eine abteilungsübergreifende Arbeitsgrundlage für Einkauf, Zoll, Buchhaltung und Geschäftsführung."
   },
   {
     situation: "Lieferantenantworten fehlen oder kommen in uneinheitlicher Form zurück.",
-    recommendation: "Das Lieferanten-Datenpaket bündelt Kommunikation und Rückmeldungen.",
+    recommendation: "Die Lieferanten-Datendienstleistung bündelt Kommunikation und Rückmeldungen.",
     text: "Wir strukturieren Anforderungen, Ansprechpartner, Status und verwertbare Datenpunkte für die weitere CBAM-Vorbereitung."
   },
   {
@@ -57,9 +57,9 @@ export default function ServicesPage() {
   return (
     <>
       <Section
-        eyebrow="CBAM-Pakete"
-        title="CBAM-Pakete für Importeure"
-        text="CBAM wird für Unternehmen dann greifbar, wenn Warenbewegungen, Lieferanten, Emissionsinformationen und interne Zuständigkeiten sauber zusammengeführt werden. Unsere Pakete sind darauf ausgelegt, genau diese Arbeitsgrundlage aufzubauen."
+        eyebrow="CBAM-Dienstleistungen"
+        title="CBAM-Dienstleistungen für Importeure"
+        text="CBAM wird für Unternehmen dann greifbar, wenn Warenbewegungen, Lieferanten, Emissionsinformationen und interne Zuständigkeiten sauber zusammengeführt werden. Unsere Dienstleistungen sind darauf ausgelegt, genau diese Arbeitsgrundlage aufzubauen."
       >
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="space-y-5 leading-8 text-slate-600">
@@ -80,7 +80,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section title="Unsere CBAM-Pakete im Überblick">
+      <Section title="Unsere CBAM-Dienstleistungen im Überblick">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {allServices.map((service) => (
             <ServiceCard key={service.title} {...service} />
@@ -90,7 +90,7 @@ export default function ServicesPage() {
 
       <Section
         eyebrow="Arbeitsprinzip"
-        title="Was alle Pakete gemeinsam haben"
+        title="Was alle Dienstleistungen gemeinsam haben"
         text="Der konkrete Umfang unterscheidet sich je nach Ausgangslage. Die Arbeitsweise bleibt gleich: strukturiert, nachvollziehbar und auf interne Nutzbarkeit ausgerichtet."
       >
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -103,7 +103,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section title="Welches Paket passt zu welchem Bedarf?">
+      <Section title="Welche Dienstleistung passt zu welchem Bedarf?">
         <div className="grid gap-5 md:grid-cols-2">
           {decisionHelp.map((item) => (
             <article key={item.situation} className="rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm">
@@ -118,7 +118,7 @@ export default function ServicesPage() {
 
       <Section
         title="Typische Bestandteile der Zusammenarbeit"
-        text="Je nach Paket und Datenlage werden einzelne Bausteine stärker oder schwächer gewichtet. Entscheidend ist, dass am Ende eine Arbeitsgrundlage entsteht, die im Unternehmen weitergeführt werden kann."
+        text="Je nach Dienstleistung und Datenlage werden einzelne Bausteine stärker oder schwächer gewichtet. Entscheidend ist, dass am Ende eine Arbeitsgrundlage entsteht, die im Unternehmen weitergeführt werden kann."
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {included.map((item) => (
@@ -130,7 +130,7 @@ export default function ServicesPage() {
       </Section>
 
       <CTASection
-        title="Welches CBAM-Paket passt zu Ihrer Situation?"
+        title="Welche CBAM-Dienstleistung passt zu Ihrer Situation?"
         text="Im Erstgespräch klären wir Datenlage, Importstruktur, offene Lieferantenpunkte und sinnvolle nächste Schritte."
         button="Kontakt aufnehmen"
       />

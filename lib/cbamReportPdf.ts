@@ -97,6 +97,40 @@ function addNotice(doc: PDFKit.PDFDocument, title: string, text: string) {
   doc.y = noteY + blockHeight + 8;
 }
 
+function addDocumentFooters(doc: PDFKit.PDFDocument) {
+  const range = doc.bufferedPageRange();
+
+  for (let index = range.start; index < range.start + range.count; index += 1) {
+    doc.switchToPage(index);
+    const pageNumber = index - range.start + 1;
+    const footerY = doc.page.height - 48;
+
+    doc
+      .moveTo(54, footerY - 10)
+      .lineTo(doc.page.width - 54, footerY - 10)
+      .strokeColor(border)
+      .lineWidth(0.8)
+      .stroke();
+    doc
+      .fillColor(muted)
+      .font("Helvetica")
+      .fontSize(7.8)
+      .text("Flaaq Holding GmbH | Großer Kamp 5a, 31633 Leese | 05761 8429666 | info@cbam-compliance.de", 54, footerY, {
+        width: 395,
+        lineBreak: false
+      });
+    doc
+      .fillColor(muted)
+      .font("Helvetica")
+      .fontSize(7.8)
+      .text(`Seite ${pageNumber} von ${range.count}`, doc.page.width - 154, footerY, {
+        width: 100,
+        align: "right",
+        lineBreak: false
+      });
+  }
+}
+
 export async function createCbamReportPdf(input: AssessmentInput, result: AssessmentResult) {
   const doc = new PDFDocument({
     size: "A4",
@@ -131,7 +165,7 @@ export async function createCbamReportPdf(input: AssessmentInput, result: Assess
     lineGap: 4
   });
   doc.fillColor("#ffffff").font("Helvetica-Bold").fontSize(9.5).text(`Bericht ${result.reportId}`, 54, 196, { width: 300, lineBreak: false });
-  doc.fillColor("#ffffff").font("Helvetica-Bold").fontSize(9.5).text("www.cbam-compliance.de", 360, 218, {
+  doc.fillColor("#ffffff").font("Helvetica-Bold").fontSize(9.5).text("cbam-compliance.de", 360, 218, {
     width: 180,
     align: "right",
     lineBreak: false
@@ -204,6 +238,7 @@ export async function createCbamReportPdf(input: AssessmentInput, result: Assess
   doc.moveDown(1);
   addNotice(doc, "Hinweis", result.disclaimer);
 
+  addDocumentFooters(doc);
   doc.end();
   return finished;
 }

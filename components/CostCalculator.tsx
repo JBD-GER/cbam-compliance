@@ -1,6 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type CnIndexItem = {
   cn: string;
@@ -107,6 +109,7 @@ function findProduct(data: CalculatorData | null, country: string, cn: string) {
 }
 
 export function CostCalculator() {
+  const router = useRouter();
   const [data, setData] = useState<CalculatorData | null>(null);
   const [rows, setRows] = useState<CalculatorRow[]>([emptyRow(1)]);
   const [loadError, setLoadError] = useState("");
@@ -231,6 +234,7 @@ export function CostCalculator() {
 
       setMailState({ status: "success", reportId: result.reportId, totalCost: result.totalCost });
       form.reset();
+      router.push("/danke?typ=kostenrechner");
     } catch (error) {
       setMailState({
         status: "error",
@@ -382,8 +386,8 @@ export function CostCalculator() {
         </datalist>
       </div>
 
-      <div className="border-t border-slate-200 p-5 sm:p-6">
-        <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col border-t border-slate-200 p-5 sm:p-6">
+        <div className="order-1 flex flex-col gap-3 sm:flex-row">
           <button type="button" className="focus-ring inline-flex rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/15 hover:bg-[#35685b]" onClick={addRow}>
             Produkt hinzufügen
           </button>
@@ -396,21 +400,21 @@ export function CostCalculator() {
           </button>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-4">
+        <div className="order-3 mt-6 grid gap-4 md:grid-cols-4">
           <Metric label="Nettomasse" value={`${formatNumber(totals.mass)} t`} />
           <Metric label="Gesamtemissionen" value={`${formatNumber(totals.grossEmissions)} tCO2e`} />
           <Metric label={`Phase-Out ${year}`} value={`${formatNumber(phaseOut)} %`} />
           <Metric label={`CBAM-Kosten ${year}`} value={formatEuro(totals.cost)} highlight />
         </div>
 
-        <div className="mt-5 rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+        <div className="order-4 mt-5 rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600">
           Datenbasis: Default Values aus <span className="font-semibold">DVs as adopted_v20260204</span> und Benchmarks aus{" "}
           <span className="font-semibold">CBAM Benchmarks_20260206</span>. Die vereinfachte Kostenschätzung folgt dem im Markt üblichen Estimator-Ansatz:
           max(SEE 2026 - Benchmark, 0) x Nettomasse x Zertifikatskosten. Der Phase-Out wird separat ausgewiesen.
         </div>
 
         {showEmailForm && (
-          <form className="mt-6 grid gap-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6" onSubmit={sendCostReport}>
+          <form className="order-2 mt-6 grid gap-5 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6" onSubmit={sendCostReport}>
             <div>
               <h3 className="text-xl font-semibold text-navy">Offizielles Ergebnisdokument per E-Mail</h3>
               <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -433,7 +437,13 @@ export function CostCalculator() {
             </div>
             <label className="flex gap-3 text-sm leading-6 text-slate-600">
               <input className="focus-ring mt-1 h-4 w-4 rounded border-slate-300 text-navy" type="checkbox" required />
-              <span>Ich stimme zu, dass meine Angaben zur Erstellung und Zusendung des CBAM-Kostendokuments verarbeitet werden.</span>
+              <span>
+                Ich stimme zu, dass meine Angaben zur Erstellung und Zusendung des CBAM-Kostendokuments verarbeitet werden, und akzeptiere die{" "}
+                <Link className="font-semibold text-navy underline underline-offset-4 hover:text-accent" href="/datenschutz">
+                  Datenschutzerklärung
+                </Link>
+                .
+              </span>
             </label>
             {mailState.status === "error" && (
               <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-700">{mailState.message}</div>

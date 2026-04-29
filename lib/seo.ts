@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://cbam-compliance.de";
+export const siteUrl = "https://www.cbam-compliance.de";
 export const siteName = "CBAM Compliance";
 export const defaultDescription =
   "Wir prüfen Importdaten, identifizieren CBAM-relevante Waren und bereiten Unternehmen strukturiert auf Registrierung, Lieferantendaten und laufende CBAM-Pflichten vor.";
