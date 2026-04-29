@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { LinkButton } from "@/components/Button";
+import { GoogleAdsConversion } from "@/components/GoogleAdsConversion";
+import { googleAdsConversionSendTo } from "@/lib/googleAds";
 import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
   ...createSeoMetadata({
-  title: "Vielen Dank",
-  description: "Ihre Anfrage ist eingegangen und wird bearbeitet.",
-  path: "/danke",
-  image: "/images/office.jpg"
+    title: "Vielen Dank",
+    description: "Ihre Anfrage ist eingegangen und wird bearbeitet.",
+    path: "/danke",
+    image: "/images/office.jpg"
   }),
   robots: {
     index: false,
@@ -44,6 +46,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
 
   return (
     <section className="px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <GoogleAdsConversion sendTo={googleAdsConversionSendTo} />
       <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
           <div className="bg-navy p-8 text-white sm:p-10 lg:p-12">

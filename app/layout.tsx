@@ -5,14 +5,13 @@ import "./globals.css";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { googleAdsId } from "@/lib/googleAds";
 import { defaultDescription, defaultOgImage, organizationJsonLd, siteName, siteUrl, websiteJsonLd } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap"
 });
-
-const googleTagId = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -85,15 +84,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `
           }}
         />
-        {googleTagId ? (
+        {googleAdsId ? (
           <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`} strategy="afterInteractive" />
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`} strategy="afterInteractive" />
             <Script id="google-tag-config" strategy="afterInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${googleTagId}');
+                gtag('config', '${googleAdsId}');
               `}
             </Script>
           </>
